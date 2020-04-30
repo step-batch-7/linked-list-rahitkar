@@ -76,6 +76,16 @@ Status remove_at(List_ptr list, int position)
   return Success;
 }
 
+Status remove_from_start(List_ptr list)
+{
+  if (list == NULL || list->head == NULL)
+  {
+    return Failure;
+  }
+  remove_at(list, 0);
+  return Success;
+}
+
 void display(List_ptr list)
 {
   Node_ptr iterator = list->head;
