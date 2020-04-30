@@ -34,7 +34,7 @@ Status add_to_end(List_ptr list, int value)
   {
     return Failure;
   }
-  
+
   Node_ptr new_node = create_node(value);
 
   if (list->head == NULL)
@@ -50,15 +50,38 @@ Status add_to_end(List_ptr list, int value)
   return Success;
 }
 
-Status remove_at(List_ptr list, int position)
+Status insert_at(List_ptr list, int value, int position)
 {
-  Node_ptr p_walk = list->head;
-  Node_ptr temp_node = list->head;
-  if (list->count <= position)
+  if (list == NULL || list->count <= position)
   {
     return Failure;
   }
-  
+  Node_ptr p_walk = list->head;
+  Node_ptr previous_node = list->head;
+  int counter = 0;
+  while (counter != position)
+  {
+    previous_node = p_walk;
+    p_walk = p_walk->next;
+    counter++;
+  }
+  Node_ptr new_node = create_node(value);
+  previous_node->next = new_node;
+  new_node->next = p_walk;
+  list->count++;
+  return Success;
+}
+
+Status remove_at(List_ptr list, int position)
+{
+  if (list == NULL || list->count <= position)
+  {
+    return Failure;
+  }
+
+  Node_ptr p_walk = list->head;
+  Node_ptr temp_node = list->head;
+
   if (position == 0)
   {
     list->head = p_walk->next;
