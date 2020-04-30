@@ -155,6 +155,17 @@ Status remove_first_occurrence(List_ptr list, int value)
   return Failure;
 }
 
+Status remove_all_occurrences(List_ptr list, int value)
+{
+  int status = remove_first_occurrence(list, value), counter = 0;
+  while(status == 1)
+  {
+  status = remove_first_occurrence(list, value);
+  counter++;
+  }
+  return counter > 0 ? Success : Failure;
+}
+
 void display(List_ptr list)
 {
   Node_ptr iterator = list->head;
