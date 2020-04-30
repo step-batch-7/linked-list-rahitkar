@@ -124,6 +124,37 @@ Status remove_from_end(List_ptr list)
   return Success;
 }
 
+int search(List_ptr list, int value)
+{
+  int position = 0;
+  Node_ptr iterator = list->head;
+  while (iterator != NULL)
+  {
+    if (iterator->value == value)
+    {
+      return position;
+    }
+    position++;
+    iterator = iterator->next;
+  }
+  return position;
+}
+
+Status remove_first_occurrence(List_ptr list, int value)
+{
+  if (list == NULL || list->head == NULL)
+  {
+    return Failure;
+  }
+  int position = search(list, value);
+  if (position < list->count)
+  {
+    remove_at(list, position);
+    return Success;
+  }
+  return Failure;
+}
+
 void display(List_ptr list)
 {
   Node_ptr iterator = list->head;
