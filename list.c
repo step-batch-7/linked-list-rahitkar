@@ -135,8 +135,13 @@ void display(List_ptr list)
   printf("\n");
 }
 
-void destroy_list(List_ptr list)
+Status clear_list(List_ptr list)
 {
+  if (list == NULL)
+  {
+    return Failure;
+  }
+  
   Node_ptr iterator = list->head;
   Node_ptr temp;
 
@@ -144,7 +149,15 @@ void destroy_list(List_ptr list)
   {
     temp = iterator;
     iterator = iterator->next;
+    list->count--;
     free(temp);
   }
+  list->head = NULL;
+  return Success;
+}
+
+void destroy_list(List_ptr list)
+{
+  clear_list(list);
   free(list);
 }
