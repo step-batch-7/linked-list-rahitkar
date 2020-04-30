@@ -2,7 +2,7 @@
 
 List_ptr create_list(void)
 {
-  List *list = malloc(sizeof(List));
+  List_ptr list = malloc(sizeof(List));
   if (list == NULL)
   {
     printf("Memory is not available");
@@ -14,9 +14,9 @@ List_ptr create_list(void)
   return list;
 }
 
-Node *create_node(int value)
+Node_ptr create_node(int value)
 {
-  Node *new_node = malloc(sizeof(Node));
+  Node_ptr new_node = malloc(sizeof(Node));
   if (new_node == NULL)
   {
     printf("Memory is not available");
@@ -35,7 +35,7 @@ Status add_to_end(List_ptr list, int value)
     return Failure;
   }
   
-  Node *new_node = create_node(value);
+  Node_ptr new_node = create_node(value);
 
   if (list->head == NULL)
   {
@@ -50,9 +50,35 @@ Status add_to_end(List_ptr list, int value)
   return Success;
 }
 
+Status remove_at(List_ptr list, int position)
+{
+  Node_ptr p_walk = list->head;
+  Node_ptr temp_node = list->head;
+  if (list->count <= position)
+  {
+    return Failure;
+  }
+  
+  if (position == 0)
+  {
+    list->head = p_walk->next;
+  }
+  int counter = 0;
+  while (counter < position)
+  {
+    temp_node = p_walk;
+    p_walk = p_walk->next;
+    counter++;
+  }
+  temp_node->next = p_walk->next;
+  list->count--;
+  free(p_walk);
+  return Success;
+}
+
 void display(List_ptr list)
 {
-  Node* iterator = list->head;
+  Node_ptr iterator = list->head;
   while (iterator != NULL)
   {
     printf("%d ", iterator->value);
@@ -63,8 +89,8 @@ void display(List_ptr list)
 
 void destroy_list(List_ptr list)
 {
-  Node *iterator = list->head;
-  Node *temp;
+  Node_ptr iterator = list->head;
+  Node_ptr temp;
 
   while (iterator != NULL)
   {
