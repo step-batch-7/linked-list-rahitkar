@@ -57,6 +57,16 @@ Status insert_at(List_ptr list, int value, int position)
   return Success;
 }
 
+Status add_to_start(List_ptr list, int value)
+{
+  if (list == NULL)
+  {
+    return Failure;
+  }
+  insert_at(list, value, 0);
+  return Success;
+}
+
 Status add_to_end(List_ptr list, int value)
 {
   if (list == NULL)
