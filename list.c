@@ -57,6 +57,20 @@ Status insert_at(List_ptr list, int value, int position)
   return Success;
 }
 
+Status add_unique(List_ptr list, int value)
+{
+  if (list == NULL || list->head == NULL)
+  {
+    return Failure;
+  }
+  int position = search(list,value);
+  if (position >= list->count)
+  {
+    return add_to_end(list, value);
+  }
+  return Failure;
+}
+
 Status add_to_start(List_ptr list, int value)
 {
   if (list == NULL)
