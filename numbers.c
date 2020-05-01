@@ -29,7 +29,7 @@ int take_position_input()
 {
   int position;
   printf("enter position ");
-    scanf("%d", &position);
+  scanf("%d", &position);
   return position;
 }
 
@@ -98,8 +98,8 @@ void oparate_on(List_ptr list, char option)
     break;
 
   case 'm':
-  printf("closing the  main menu\n"); 
-  break;
+    printf("closing the  main menu\n");
+    break;
 
   default:
     printf("option not listed\n");
