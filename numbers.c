@@ -17,88 +17,89 @@ void show_result(Status result, Char_ptr message)
   return;
 }
 
+int take_number_input()
+{
+  int number;
+  printf("enter your number ");
+  scanf("%d", &number);
+  return number;
+}
+
+int take_position_input()
+{
+  int position;
+  printf("enter position ");
+    scanf("%d", &position);
+  return position;
+}
+
 void oparate_on(List_ptr list, char option)
 {
-  Status result;
-  int value, position;
+  int result;
+  int number, position;
   switch (option)
   {
   case 'a':
-    printf("enter your number ");
-    scanf("%d", &value);
-    result = add_to_end(list, value);
-    show_result(result, "added");
+    number = take_number_input();
+    show_result(add_to_end(list, number), "added");
     break;
 
-    case 'b':
-    printf("enter your number ");
-    scanf("%d", &value);
-    result = add_to_start(list, value);
-    show_result(result, "added");
+  case 'b':
+    number = take_number_input();
+    show_result(add_to_start(list, number), "added");
     break;
 
-    case 'c':
-    printf("enter your number ");
-    scanf("%d", &value);
-    printf("enter position ");
-    scanf("%d", &position);
-    result = insert_at(list, value, position);
-    show_result(result, "added");
+  case 'c':
+    number = take_number_input();
+    position = take_position_input();
+    show_result(insert_at(list, number, position), "added");
     break;
 
-    case 'd':
-    printf("enter your number ");
-    scanf("%d", &value);
-    result = add_unique(list, value);
-    show_result(result, "added");
+  case 'd':
+    number = take_number_input();
+    show_result(add_unique(list, number), "added");
     break;
 
-    case 'e':
-    result = remove_from_start(list);
-    show_result(result, "removed");
+  case 'e':
+    show_result(remove_from_start(list), "removed");
     break;
 
-    case 'f':
-    result = remove_from_end(list);
-    show_result(result, "removed");
+  case 'f':
+    show_result(remove_from_end(list), "removed");
     break;
 
-    case 'g':
-    printf("enter position ");
-    scanf("%d", &position);
-    result = remove_at(list, position);
-    show_result(result, "removed");
+  case 'g':
+    position = take_position_input();
+    show_result(remove_at(list, position), "removed");
     break;
 
-    case 'h':
-    printf("enter number ");
-    scanf("%d", &value);
-    result = remove_first_occurrence(list, value);
-    show_result(result, "removed");
+  case 'h':
+    number = take_number_input();
+    show_result(remove_first_occurrence(list, number), "removed");
     break;
 
-    case 'i':
-    printf("enter number ");
-    scanf("%d", &value);
-    result = remove_all_occurrences(list, value);
-    show_result(result, "removed");
+  case 'i':
+    number = take_number_input();
+    show_result(remove_all_occurrences(list, number), "removed");
     break;
 
-    case 'j':
-    result = clear_list(list);
-    show_result(result, "cleared");
+  case 'j':
+    show_result(clear_list(list), "cleared");
     break;
 
-    case 'k':
-    printf("enter number ");
-    scanf("%d", &value);
-    result = search(list, value) < list->count ? 1 : 0;
+  case 'k':
+    number = take_number_input();
+    result = search(list, number) < list->count ? 1 : 0;
     show_result(result, "exits");
     break;
 
-    case 'l':
+  case 'l':
     display(list);
     break;
+
+  case 'm':
+  printf("closing the  main menu\n"); 
+  break;
 
   default:
     printf("option not listed\n");
