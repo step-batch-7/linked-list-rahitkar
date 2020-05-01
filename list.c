@@ -197,18 +197,10 @@ Status clear_list(List_ptr list)
   {
     return Failure;
   }
-  
-  Node_ptr iterator = list->head;
-  Node_ptr temp;
-
-  while (iterator != NULL)
+  while (list->head != NULL)
   {
-    temp = iterator;
-    iterator = iterator->next;
-    list->count--;
-    free(temp);
+  remove_from_start(list);
   }
-  list->head = NULL;
   return Success;
 }
 
