@@ -1,3 +1,6 @@
+#include "stdlib.h"
+#include <stdio.h>
+
 #include "list.h"
 
 List_ptr create_list(void)
@@ -57,6 +60,16 @@ Status insert_at(List_ptr list, int value, int position)
   return Success;
 }
 
+Status add_to_start(List_ptr list, int value)
+{
+  return insert_at(list, value, 0);
+}
+
+Status add_to_end(List_ptr list, int value)
+{
+  return insert_at(list, value, list->count);
+}
+
 Status add_unique(List_ptr list, int value)
 {
   if (list == NULL || list->head == NULL)
@@ -69,26 +82,6 @@ Status add_unique(List_ptr list, int value)
     return add_to_end(list, value);
   }
   return Failure;
-}
-
-Status add_to_start(List_ptr list, int value)
-{
-  if (list == NULL)
-  {
-    return Failure;
-  }
-  insert_at(list, value, 0);
-  return Success;
-}
-
-Status add_to_end(List_ptr list, int value)
-{
-  if (list == NULL)
-  {
-    return Failure;
-  }
-  insert_at(list, value, list->count);
-  return Success;
 }
 
 Status remove_at(List_ptr list, int position)
@@ -120,22 +113,12 @@ Status remove_at(List_ptr list, int position)
 
 Status remove_from_start(List_ptr list)
 {
-  if (list == NULL || list->head == NULL)
-  {
-    return Failure;
-  }
-  remove_at(list, 0);
-  return Success;
+  return remove_at(list, 0);
 }
 
 Status remove_from_end(List_ptr list)
 {
-  if (list == NULL || list->head == NULL)
-  {
-    return Failure;
-  }
-  remove_at(list, (list->count) - 1);
-  return Success;
+  return remove_at(list, (list->count) - 1);
 }
 
 int search(List_ptr list, int value)
