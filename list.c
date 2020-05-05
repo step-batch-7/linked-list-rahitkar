@@ -33,7 +33,7 @@ Node_ptr create_node(int value)
 
 Status insert_at(List_ptr list, int value, int position)
 {
-  if (list == NULL || list->count < position)
+  if (list == NULL || list->count < position || position < 0)
   {
     return Failure;
   }
