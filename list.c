@@ -117,7 +117,7 @@ Status add_unique(List_ptr list, int value)
 
 Status remove_at(List_ptr list, int position)
 {
-  if (list == NULL || list->count <= position)
+  if (list == NULL || list->count <= position || position < 0) 
   {
     return Failure;
   }
