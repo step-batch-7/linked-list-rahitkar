@@ -75,9 +75,11 @@ Status add_to_start(List_ptr list, int value)
   if (list->head == NULL)
   {
   list->last = list->head; 
+  list->count++;
   return Success;
   }
   list->head->next = previous_head;
+  list->count++;
   return Success;
 }
 
@@ -94,6 +96,7 @@ Status add_to_end(List_ptr list, int value)
   Node_ptr previous_last = list->last;
   list->last = create_node(value);
   previous_last->next = list->last;
+  list->count++;
   return Success;
 } 
 

@@ -36,9 +36,26 @@ void test_create_list(char* message)
   show_result(0, message);
 }
 
+void test_add_to_start(List_ptr list, int value, Char_ptr message)
+{
+  int previous_count = list->count;
+  add_to_start(list, value);
+  if (list->count == previous_count + 1 && list->head->value == value)
+  {
+    show_result(1, message);
+    return;
+  }
+  show_result(0, message);
+}
+
 int main(void)
 {
   test_create_list("should create a empty list\n");
   printf("\n");
   test_create_node(4, "should create a node with value 4\n");
+  printf("\n");
+  List_ptr list = create_list();
+  display(list);
+  test_add_to_start(list, 2, "should insert value 2 in the possition 0 in a empty list\n");
+  test_add_to_start(list, 4, "should enter value 4 in the possition 0\n");
 }
