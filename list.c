@@ -43,10 +43,10 @@ Status insert_at(List_ptr list, int value, int position)
     return add_to_start(list, value);
   }
 
-  if(position == list->count) 
+  if (position == list->count)
   {
     return add_to_end(list, value);
-  } 
+  }
 
   Node_ptr p_walk = list->head;
   Node_ptr previous_node = list->head;
@@ -71,13 +71,14 @@ Status add_to_start(List_ptr list, int value)
   {
     return Failure;
   }
-  list->head = create_node(value);
   if (list->head == NULL)
   {
-  list->last = list->head; 
-  list->count++;
-  return Success;
+    list->head = create_node(value);
+    list->last = list->head;
+    list->count++;
+    return Success;
   }
+  list->head = create_node(value);
   list->head->next = previous_head;
   list->count++;
   return Success;
@@ -85,6 +86,7 @@ Status add_to_start(List_ptr list, int value)
 
 Status add_to_end(List_ptr list, int value)
 {
+  Node_ptr previous_last = list->last;
   if (list == NULL)
   {
     return Failure;
@@ -93,12 +95,11 @@ Status add_to_end(List_ptr list, int value)
   {
     return add_to_start(list, value);
   }
-  Node_ptr previous_last = list->last;
   list->last = create_node(value);
   previous_last->next = list->last;
   list->count++;
   return Success;
-} 
+}
 
 Status add_unique(List_ptr list, int value)
 {
@@ -106,7 +107,7 @@ Status add_unique(List_ptr list, int value)
   {
     return Failure;
   }
-  int position = search(list,value);
+  int position = search(list, value);
   if (position >= list->count)
   {
     return add_to_end(list, value);
@@ -185,10 +186,10 @@ Status remove_first_occurrence(List_ptr list, int value)
 Status remove_all_occurrences(List_ptr list, int value)
 {
   int status = remove_first_occurrence(list, value), counter = 0;
-  while(status == 1)
+  while (status == 1)
   {
-  status = remove_first_occurrence(list, value);
-  counter++;
+    status = remove_first_occurrence(list, value);
+    counter++;
   }
   return counter > 0 ? Success : Failure;
 }
@@ -212,7 +213,7 @@ Status clear_list(List_ptr list)
   }
   while (list->head != NULL)
   {
-  remove_from_start(list);
+    remove_from_start(list);
   }
   return Success;
 }
