@@ -2,5 +2,6 @@
 #define __TEST_ADDS_H
 
 void test_add_to_start();
+void test_add_to_end();
 
 #endif

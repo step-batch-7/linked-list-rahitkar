@@ -6,5 +6,6 @@ int main(void)
   test_create_list();
   test_create_node();
   test_add_to_start();
+  test_add_to_end();
   return 0;
 }
