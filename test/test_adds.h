@@ -3,5 +3,6 @@
 
 void test_add_to_start();
 void test_add_to_end();
+void test_insert_at();
 
 #endif
