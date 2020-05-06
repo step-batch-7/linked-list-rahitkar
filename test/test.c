@@ -3,80 +3,58 @@
 
 #include "../list.h"
 
-void show_result(int status, char *message)
+//________assert_functions__________
+void assert_null_equal(void* expectedValue, void* actualValue, Char_ptr message)
 {
-  printf("%s", message);
-  if (status)
+  printf("%s\n", message);
+  if (actualValue != expectedValue)
   {
-    printf("PASSED\n");
+    printf("✗ \n  -> expected: %s\n  -> actual: %s\n", (Char_ptr)expectedValue, (Char_ptr)actualValue);
     return;
   }
-  printf("FAILED\n");
+  printf("✓ \n  -> expected: %s\n  -> actual: %s\n", (Char_ptr)expectedValue, (Char_ptr)actualValue);
 }
 
-void test_create_node(int value, char* message)
+void assert_int_equal(int expectedValue, int actualValue, Char_ptr message)
 {
-  Node_ptr node = create_node(value);
-  if (node->value == value && node->next == NULL)
+  printf("%s\n", message);
+  if (actualValue != expectedValue)
   {
-    show_result(1, message);
+    printf("✗ \n  -> expected: %d\n  -> actual: %d\n", expectedValue, actualValue);
     return;
   }
-  show_result(0, message);
+  printf("✓ \n  -> expected: %d\n  -> actual: %d\n", expectedValue, actualValue);
 }
 
-void test_create_list(char* message)
+// ________tests_______________
+void test_create_list()
 {
+  printf("test_create_list\n");
   List_ptr list = create_list();
-  if (list->count == 0 && list->head == NULL && list->last == NULL)
-  {
-    show_result(1, message);
-    return;
-  }
-  show_result(0, message);
+  assert_null_equal(NULL, list->head, "should create a empty list with null in head");
+  assert_null_equal(NULL, list->last, "should create a empty list with null in last");
+  assert_int_equal(0, list->count, "should create a empty list with 0 in count");
+  printf("\n");
 }
 
-void test_add_to_start(List_ptr list, int value, Char_ptr message)
+void test_create_node()
 {
-  int previous_count = list->count;
-  add_to_start(list, value);
-  if (list->count == previous_count + 1 && list->head->value == value)
-  {
-    show_result(1, message);
-    return;
-  }
-  show_result(0, message);
+  printf("test_create_node\n");
+  Node_ptr node = create_node(4);
+  assert_int_equal(4, node->value, "should create a node with value 4");
+  assert_null_equal(NULL, node->next, "should create a node with null next");
+  printf("\n");
 }
 
-void test_add_to_end(List_ptr list, int value, Char_ptr message)
+// _________runTest_________________
+void runTest(void)
 {
-  int previous_count = list->count;
-  add_to_end(list, value);
-  if (list->count == previous_count + 1 && list->last->value == value)
-  {
-    show_result(1, message);
-    return;
-  }
-  show_result(0, message);
+  test_create_list();
+  test_create_node();
 }
 
 int main(void)
 {
-  test_create_list("should create a empty list\n");
-  printf("\n");
-
-  test_create_node(4, "should create a node with value 4\n");
-  printf("\n");
-
-  printf("add_to_start\n");
-  List_ptr list = create_list();
-  display(list);
-  test_add_to_start(list, 2, "should insert value 2 in possition 0 in a empty list\n");
-  test_add_to_start(list, 4, "should enter value 4 in possition 0\n");
-  printf("\n");
-
-  printf("add_to_end\n");
-  list = create_list();
-  test_add_to_end(list, 4, "should insert value 2 in possition 0 in a empty list\n");
-  test_add_to_end(list, 6, "should enter value 3 in possition 1\n");
+  runTest();
+  return 0;
 }
