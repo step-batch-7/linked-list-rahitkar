@@ -59,5 +59,8 @@ void test_insert_at()
   assert_int_equal(6, list->last->value, "list's last's value should be 6 for adding it in the given list");
   assert_int_equal(8, list->head->next->value, "value in the second node should be 8 after addition");
   assert_int_equal(4, list->head->value, "list's head's value should remain 4 after adding 6 in the last position of given list");
+
+  assert_int_equal(Failure, insert_at(list, 10, 4), "should return failure for given invalid position");
+  assert_int_equal(Failure, insert_at(list, 10, -1), "should return failure for given negative position");
   printf("\n");
 }
