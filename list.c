@@ -62,10 +62,6 @@ Status insert_at(List_ptr list, int value, int position)
 Status add_to_start(List_ptr list, int value)
 {
   Node_ptr previous_head = list->head;
-  if (list == NULL)
-  {
-    return Failure;
-  }
   if (list->head == NULL)
   {
     list->head = create_node(value);
@@ -82,10 +78,6 @@ Status add_to_start(List_ptr list, int value)
 Status add_to_end(List_ptr list, int value)
 {
   Node_ptr previous_last = list->last;
-  if (list == NULL)
-  {
-    return Failure;
-  } 
   if (list->head == NULL)
   {
     return add_to_start(list, value);
