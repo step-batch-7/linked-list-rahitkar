@@ -157,11 +157,11 @@ Status remove_from_start(List_ptr list)
 
 Status remove_from_end(List_ptr list)
 {
-  if (list == NULL || list->last == NULL)
+  if (list == NULL || list->head == NULL)
   {
     return Failure;
   }
-  
+
   if (list->count == 1)
   {
     return remove_from_start(list);
