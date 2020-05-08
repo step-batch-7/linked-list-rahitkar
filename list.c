@@ -43,11 +43,6 @@ Status insert_at(List_ptr list, int value, int position)
     return add_to_start(list, value);
   }
 
-  if (position == list->count)
-  {
-    return add_to_end(list, value);
-  }
-
   Node_ptr p_walk = list->head;
   Node_ptr previous_node = list->head;
   int counter = 0;
@@ -90,7 +85,7 @@ Status add_to_end(List_ptr list, int value)
   if (list == NULL)
   {
     return Failure;
-  }
+  } 
   if (list->head == NULL)
   {
     return add_to_start(list, value);
