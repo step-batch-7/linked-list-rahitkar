@@ -161,6 +161,12 @@ Status remove_from_end(List_ptr list)
   {
     return Failure;
   }
+  
+  if (list->count == 1)
+  {
+    return remove_from_start(list);
+  }
+  
   int counter = 0;
   Node_ptr p_walk = list->head;
   Node_ptr temp_node = list->head;
